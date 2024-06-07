@@ -1,6 +1,7 @@
 package org.example.validattion_api_session03.controller;
 
 import jakarta.validation.Valid;
+import org.example.validattion_api_session03.exception.DataException;
 import org.example.validattion_api_session03.model.dto.request.AccountForm;
 import org.example.validattion_api_session03.model.dto.response.DataResonse;
 import org.example.validattion_api_session03.model.entity.Account;
@@ -30,13 +31,13 @@ public class AccountController {
     }
 
     @PostMapping
-    public ResponseEntity<DataResonse<Account>> insertAccount(@Valid @RequestBody AccountForm accountForm){
+    public ResponseEntity<DataResonse<Account>> insertAccount(@Valid @RequestBody AccountForm accountForm) throws DataException {
         return new ResponseEntity<>(new DataResonse<>(accountService.insert(accountForm),HttpStatus.OK), HttpStatus.OK);
     }
 
-    @PutMapping
-    public ResponseEntity<DataResonse<Account>> updateAccount(@Valid @RequestBody Account account){
-        return new ResponseEntity<>(new DataResonse<>(accountService.update(account),HttpStatus.OK), HttpStatus.OK);
+    @PutMapping("/{accountId}")
+    public ResponseEntity<DataResonse<Account>> updateAccount(@Valid @RequestBody AccountForm accountForm, @PathVariable Integer accountId){
+        return new ResponseEntity<>(new DataResonse<>(accountService.update(accountForm,accountId),HttpStatus.OK), HttpStatus.OK);
     }
 
 }

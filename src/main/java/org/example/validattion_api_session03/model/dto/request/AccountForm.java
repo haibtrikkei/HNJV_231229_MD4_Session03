@@ -1,9 +1,7 @@
 package org.example.validattion_api_session03.model.dto.request;
 
-import jakarta.persistence.Column;
 import jakarta.validation.constraints.*;
 import lombok.*;
-import org.example.validattion_api_session03.validator.UserNameExist;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
@@ -15,7 +13,7 @@ import java.util.Date;
 @Builder
 public class AccountForm {
     @NotBlank(message = "Username is empty")
-    @UserNameExist
+    //@UserNameExist
     private String username;
     @NotBlank(message = "Password is empty")
     private String password;

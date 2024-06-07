@@ -1,6 +1,7 @@
 package org.example.validattion_api_session03.advice;
 
 import jakarta.validation.UnexpectedTypeException;
+import org.example.validattion_api_session03.exception.DataException;
 import org.example.validattion_api_session03.model.dto.response.DataError;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -27,6 +28,11 @@ public class ApiValidateAdvice {
 
     @ExceptionHandler(UnexpectedTypeException.class)
     public DataError<?> handUnexpected(UnexpectedTypeException e){
+        return new DataError<>("error",e.getLocalizedMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    @ExceptionHandler(DataException.class)
+    public DataError<?> handUnData(DataException e){
         return new DataError<>("error",e.getLocalizedMessage(),HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }

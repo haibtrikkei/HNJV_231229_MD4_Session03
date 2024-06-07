@@ -13,5 +13,6 @@ public class DataException extends Exception{
     private String fieldError;
     public DataException(String fieldError, String message) {
         super(message);
+        this.fieldError = fieldError;
     }
 }
